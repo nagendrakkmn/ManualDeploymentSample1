@@ -20,12 +20,19 @@ jobs:
   bump-version:
     name: Bump Package Version
     runs-on: ubuntu-latest
+    
+    env:
+      apigeeProfile: dev
+      
     steps:
-      - name: populate profile 
-         apigeeProfile="dev"
+      - name: dev  profile 
            if:${{(github.event.inputs.environment == 'dev' && github.event.inputs.ApigeeOrg == 'shell-nonprod')}}
-           apigeeProfile = "dev"
+        run: echo "apigeeProfile is dev" 
+      
+      - name: test Profile
            if:${{(github.event.inputs.environment == 'test' && github.event.inputs.ApigeeOrg == 'shell')}}
-           apigeeProfile = "test"
+        run: echo "apigeeProfile is test" 
+        
+      - name: prod Profile
             if:${{(github.event.inputs.environment == 'prod' && github.event.inputs.ApigeeOrg == 'shell')}}
-            apigeeProfile = "prod"
+        run: echo "apigeeProfile is prod" 
