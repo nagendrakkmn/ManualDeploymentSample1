@@ -27,12 +27,22 @@ jobs:
     steps:
       - name: dev  profile 
            if:${{(github.event.inputs.environment == 'dev' && github.event.inputs.ApigeeOrg == 'shell-nonprod')}}
-        run: echo "apigeeProfile is dev" 
+        run: |
+                for ((i = 0 ; i < 10 ; i++)); do
+                  echo "Dev Profile"
+                done               
       
       - name: test Profile
            if:${{(github.event.inputs.environment == 'test' && github.event.inputs.ApigeeOrg == 'shell')}}
-        run: echo "apigeeProfile is test" 
+         
+        run: |
+                for ((i = 0 ; i < 10 ; i++)); do
+                  echo "Test  Profile"
+                done      
         
       - name: prod Profile
             if:${{(github.event.inputs.environment == 'prod' && github.event.inputs.ApigeeOrg == 'shell')}}
-        run: echo "apigeeProfile is prod" 
+        run: |
+                for ((i = 0 ; i < 10 ; i++)); do
+                  echo "prod  Profile"
+                done 
