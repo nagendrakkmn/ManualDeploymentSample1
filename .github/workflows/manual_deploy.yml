@@ -26,7 +26,8 @@ jobs:
       
     steps:
       - name: dev  profile 
-           if:${{(github.event.inputs.environment == 'dev' && github.event.inputs.ApigeeOrg == 'shell-nonprod')}}
+        env:
+           profile: ${{(github.event.inputs.environment == 'dev' && github.event.inputs.ApigeeOrg == 'shell-nonprod')}}
         run: |                
                 if ${profile} == true; then
                   echo "flag=true" >> $GITHUB_ENV
@@ -55,7 +56,9 @@ jobs:
                 fi              
         
       - name: prod Profile
-            if:${{(github.event.inputs.environment == 'prod' && github.event.inputs.ApigeeOrg == 'shell')}}
+        env:
+           profile: ${{(github.event.inputs.environment == 'prod' && github.event.inputs.ApigeeOrg == 'shell')}}
+
         run: |                
                 if ${profile} == true; then
                   echo "flag=true" >> $GITHUB_ENV
