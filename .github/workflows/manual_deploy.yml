@@ -28,7 +28,4 @@ jobs:
            if:${{(github.event.inputs.environment == 'test' && github.event.inputs.ApigeeOrg == 'shell')}}
            apigeeProfile = "test"
             if:${{(github.event.inputs.environment == 'prod' && github.event.inputs.ApigeeOrg == 'shell')}}
-            apigeeProfile = "prod"            
-      - run: echo "Print profile - ${{apigeeProfile}}"
-     
-       
+            apigeeProfile = "prod"
