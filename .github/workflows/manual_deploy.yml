@@ -27,22 +27,43 @@ jobs:
     steps:
       - name: dev  profile 
            if:${{(github.event.inputs.environment == 'dev' && github.event.inputs.ApigeeOrg == 'shell-nonprod')}}
-        run: |
-                for ((i = 0 ; i < 10 ; i++)); do
-                  echo "Dev Profile"
-                done               
+        run: |                
+                if ${profile} == true; then
+                  echo "flag=true" >> $GITHUB_ENV
+                  echo "profile is set to dev"
+                  for ((i = 0 ; i < 10 ; i++)); do
+                  echo "dev  Profile"
+                  done  
+                else
+                  echo "flag=false" >> $GITHUB_ENV
+                  echo "profile is not set to dev"
+                fi                
       
       - name: test Profile
-           if:${{(github.event.inputs.environment == 'test' && github.event.inputs.ApigeeOrg == 'shell')}}
-         
-        run: |
-                for ((i = 0 ; i < 10 ; i++)); do
+        env:
+           profile: ${{(github.event.inputs.environment == 'test' && github.event.inputs.ApigeeOrg == 'shell')}}
+        run: |                
+                if ${profile} == true; then
+                  echo "flag=true" >> $GITHUB_ENV
+                  echo "profile is set to test"
+                  for ((i = 0 ; i < 10 ; i++)); do
                   echo "Test  Profile"
-                done      
+                  done  
+                else
+                  echo "flag=false" >> $GITHUB_ENV
+                  echo "profile is not set to test"
+                fi              
         
       - name: prod Profile
             if:${{(github.event.inputs.environment == 'prod' && github.event.inputs.ApigeeOrg == 'shell')}}
-        run: |
-                for ((i = 0 ; i < 10 ; i++)); do
-                  echo "prod  Profile"
-                done 
+        run: |                
+                if ${profile} == true; then
+                  echo "flag=true" >> $GITHUB_ENV
+                  echo "profile is set to prod"
+                  for ((i = 0 ; i < 10 ; i++)); do
+                  echo "Prod  Profile"
+                  done  
+                else
+                  echo "flag=false" >> $GITHUB_ENV
+                  echo "profile is not set to Prod"
+                fi 
