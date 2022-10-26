@@ -21,6 +21,14 @@ jobs:
     name: Bump Package Version
     runs-on: ubuntu-latest
     steps:
-      - name: Example variable usage
-        run: echo "Print profile - ${{github.event.inputs.environment}}"
+      - name: populate profile 
+         apigeeProfile="dev"
+           if:${{(github.event.inputs.environment == "dev" && github.event.inputs.ApigeeOrg == "shell-nonprod")}}
+           apigeeProfile = "dev"
+           if:${{(github.event.inputs.environment == "test" && github.event.inputs.ApigeeOrg == "shell")}}
+           apigeeProfile = "test"
+            if:${{(github.event.inputs.environment == "prod" && github.event.inputs.ApigeeOrg == "shell")}}
+            apigeeProfile = "prod"
+        run: echo "Print profile - ${{apigeeProfile}}"
+     
        
